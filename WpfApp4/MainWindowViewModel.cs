@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace WpfApp4
 {
-    internal class MainWindowViewModel : INotifyPropertyChanged
+    internal class MainWindowViewModel
     {
         private bool optionEnabled;
         public bool OptionEnable
@@ -20,15 +19,10 @@ namespace WpfApp4
                 if (optionEnabled == value) return;
 
                 optionEnabled = value;
-                OnPropertyChanged();
+                OptionEnableChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
+        public event EventHandler OptionEnableChanged;
     }
 }
